@@ -1,5 +1,6 @@
 using ECS;
 using UnityEngine;
+using MyTest.Components;
 
 namespace MyTest.Systems
 {
@@ -37,7 +38,7 @@ namespace MyTest.Systems
 
 			var view = _entityManager.GetComponent<ViewComponent> (entity);
 
-			if (view.viewPrefab != null) {
+			if (view.viewPrefab != null && view.view == null) {
 				view.view = GameObject.Instantiate (view.viewPrefab);
 			}
 

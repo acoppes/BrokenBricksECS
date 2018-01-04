@@ -1,5 +1,6 @@
 using ECS;
 using UnityEngine;
+using MyTest.Components;
 
 namespace MyTest.Systems
 {
@@ -30,5 +31,5 @@ namespace MyTest.Systems
 		}
 
 	}
-	
+
 }
