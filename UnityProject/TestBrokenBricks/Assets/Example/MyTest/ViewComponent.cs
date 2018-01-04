@@ -1,6 +1,8 @@
 using ECS;
+using UnityEngine;
 
-public struct ViewComponent : IComponent
+public class ViewComponent : IComponent
 {
-	
+	public GameObject viewPrefab;
+	public GameObject view;
 }

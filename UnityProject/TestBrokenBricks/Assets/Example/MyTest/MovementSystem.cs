@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace MyTest.Systems
 {
-
 	public class MovementSystem : ComponentSystem
 	{
-		[InjectTuple]
+		ComponentArray<PositionComponent> _positions;
 		ComponentArray<MovementComponent> _movements;
 
 		[InjectDependency]
@@ -15,8 +14,9 @@ namespace MyTest.Systems
 		public override void OnStart ()
 		{
 			base.OnStart ();
-			var group = _entityManager.GetComponentGroup (typeof(MovementComponent));
+			var group = _entityManager.GetComponentGroup (typeof(MovementComponent), typeof(PositionComponent));
 			_movements = group.GetComponent<MovementComponent> ();
+			_positions = group.GetComponent<PositionComponent> ();
 		}
 
 		public override void OnFixedUpdate ()
@@ -25,7 +25,7 @@ namespace MyTest.Systems
 
 			for (int i = 0; i < _movements.Length; i++) {
 				var movement = _movements [i];
-				movement.position += movement.velocity * Time.deltaTime;
+				_positions[i].position = _positions[i].position + movement.velocity * Time.deltaTime;
 			}
 		}
 

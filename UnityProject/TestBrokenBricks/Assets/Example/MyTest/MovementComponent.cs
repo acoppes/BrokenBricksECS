@@ -1,9 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using ECS;
+using UnityEngine;
 
-public struct MovementComponent : IComponent
+public class PositionComponent : IComponent
 {
-	
+	public Vector2 position;
+}
+
+public class MovementComponent : IComponent
+{
+	public Vector2 velocity;
 }
