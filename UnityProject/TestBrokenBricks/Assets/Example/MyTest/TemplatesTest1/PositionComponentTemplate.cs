@@ -10,8 +10,7 @@ public class PositionComponentTemplate : GenericEntityTemplate<PositionComponent
 
 		var p = positionComponent.position;
 		p.x = transform.position.x;
-		p.y = transform.position.y;
-
+		p.y = transform.position.z;
 		positionComponent.position = p;
 	}
 

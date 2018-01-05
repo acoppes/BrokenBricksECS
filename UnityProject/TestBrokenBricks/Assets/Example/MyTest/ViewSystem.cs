@@ -58,7 +58,7 @@ namespace MyTest.Systems
 
 				var pos = _positions [i].position;
 
-				view.view.transform.position = new Vector3 (pos.x, pos.y, 0);
+				view.view.transform.position = new Vector3 (pos.x, 0, pos.y);
 				view.sprite.transform.localPosition = new Vector3(0, pos.z, 0);
 
 				if (view.animator != null) {
