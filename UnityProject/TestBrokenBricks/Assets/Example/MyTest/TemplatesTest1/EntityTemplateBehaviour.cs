@@ -1,17 +1,16 @@
 using ECS;
 using UnityEngine;
 
-public abstract class EntityTemplateBehaviour : MonoBehaviour, EntityTemplate
+public class EntityTemplateBehaviour : MonoBehaviour, EntityTemplate
 {
-	[InjectDependency]
-	protected EntityManager _entityManager;
-
-	void Awake()
-	{
-		InjectionManager.ResolveDependency(this);
-	}
-		
 	#region EntityTemplate implementation
-	public abstract void Apply (Entity e);
+	public void Apply (Entity e) 
+	{
+		var componentTemplates = gameObject.GetComponentsInChildren<ComponentTemplateBehaviour> ();
+		foreach (var c in componentTemplates) {
+			c.Apply (e);
+		}
+	}
 	#endregion
+
 }

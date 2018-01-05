@@ -1,8 +1,7 @@
 using ECS;
-using MyTest.Components;
 using UnityEngine;
 
-public class GenericEntityTemplate<T> : EntityTemplateBehaviour where T : IComponent
+public class GenericEntityTemplate<T> : ComponentTemplateBehaviour where T : IComponent
 {
 	public T t;
 

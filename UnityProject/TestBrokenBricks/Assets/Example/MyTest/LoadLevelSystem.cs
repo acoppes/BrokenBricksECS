@@ -11,11 +11,20 @@ public class LoadLevelSystem : ComponentSystem
 	{
 		base.OnStart ();
 
-		var e1 = _entityManager.CreateEntity ();
-		EntityTemplateExtensions.Apply(e1, GameObject.Find ("Hero1"));
+		var sceneEntities = GameObject.FindObjectsOfType<EntityTemplateBehaviour> ();
 
-		var e2 = _entityManager.CreateEntity ();
-		EntityTemplateExtensions.Apply(e2, GameObject.Find ("Hero2"));
+		foreach (var sceneEntity in sceneEntities) {
+			var e = _entityManager.CreateEntity ();
+			sceneEntity.Apply (e);
+
+			sceneEntity.gameObject.SetActive (false);
+		}
+
+//		var e1 = _entityManager.CreateEntity ();
+//		EntityTemplateExtensions.Apply(e1, GameObject.Find ("Hero1"));
+
+//		var e2 = _entityManager.CreateEntity ();
+//		EntityTemplateExtensions.Apply(e2, GameObject.Find ("Hero2"));
 
 //		var e1 = CreateTestObject ();
 //		var e2 = CreateTestObject ();
