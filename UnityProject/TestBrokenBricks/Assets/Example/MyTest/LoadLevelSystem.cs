@@ -16,12 +16,14 @@ public class LoadLevelSystem : ComponentSystem
 
 		_entityManager.AddComponent (e1, new InputComponent () {
 			horizontalAxisName = "Horizontal",
-			verticalAxisName = "Vertical"
+			verticalAxisName = "Vertical",
+			jumpActionName = "Jump"
 		});
 
 		_entityManager.AddComponent (e2, new InputComponent () {
 			horizontalAxisName = "Horizontal2",
-			verticalAxisName = "Vertical2"
+			verticalAxisName = "Vertical2",
+			jumpActionName = "Jump2"
 		});
 
 		_entityManager.GetComponent<PositionComponent> (e1).position = new Vector2(0, 0);
@@ -36,7 +38,7 @@ public class LoadLevelSystem : ComponentSystem
 		var e = _entityManager.CreateEntity();
 
 		_entityManager.AddComponent (e, new PositionComponent () { 
-			position = new Vector2(0, 0),
+			position = new Vector3(0, 0, 0),
 			lookingDirection = new Vector2(1, 0)
 		});
 
@@ -50,6 +52,11 @@ public class LoadLevelSystem : ComponentSystem
 		_entityManager.AddComponent (e, new ViewComponent () { 
 			viewPrefab = viewPrefab
 		});
+
+		_entityManager.AddComponent (e, new JumpComponent () { 
+			jumpSpeed = 3,
+			maxJumpHeight = 2
+		});
 				
 		_entityManager.AddComponent (e, new ControllerComponent ());
 
@@ -61,7 +68,13 @@ public class LoadLevelSystem : ComponentSystem
 		var e = _entityManager.CreateEntity();
 
 		_entityManager.AddComponent (e, new PositionComponent () { 
-			position = new Vector2(0, 0)
+			position = new Vector3(0, 0, 0),
+			lookingDirection = new Vector2(1, 0)
+		});
+
+		_entityManager.AddComponent (e, new MovementComponent () {
+			velocity = new Vector2(0, 0),
+			speed = 0
 		});
 
 		var viewPrefab = GameObject.FindObjectOfType<MyTestSceneController> ().viewPrefab;

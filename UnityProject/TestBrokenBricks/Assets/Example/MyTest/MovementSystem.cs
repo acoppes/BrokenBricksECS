@@ -26,7 +26,7 @@ namespace MyTest.Systems
 
 			for (int i = 0; i < _movements.Length; i++) {
 				var movement = _movements [i];
-				_positions[i].position = _positions[i].position + movement.velocity * Time.deltaTime;
+				_positions[i].position = _positions[i].position + (Vector3)(movement.velocity * Time.deltaTime);
 
 				if (Mathf.Abs(movement.velocity.x) > 0)
 					_positions [i].lookingDirection = movement.velocity.normalized;

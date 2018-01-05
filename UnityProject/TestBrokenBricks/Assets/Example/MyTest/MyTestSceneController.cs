@@ -12,5 +12,6 @@ public class MyTestSceneController : ECSController<UnityStandardSystemRoot, Unit
 		AddSystem<LoadLevelSystem> ();
 		AddSystem<InputSystem> ();
 		AddSystem<ControllerSystem> ();
+		AddSystem<JumpSystem> ();
 	}
 }

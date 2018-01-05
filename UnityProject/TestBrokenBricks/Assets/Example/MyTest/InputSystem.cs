@@ -31,6 +31,7 @@ namespace MyTest.Systems
 					y = Input.GetAxis(_inputs[i].verticalAxisName),
 				};
 
+				_controllers [i].isJumpPressed = Input.GetButton (_inputs [i].jumpActionName);
 			}
 		}
 

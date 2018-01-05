@@ -9,6 +9,7 @@ namespace MyTest.Systems
 		ComponentArray<ViewComponent> _views;
 		ComponentArray<PositionComponent> _positions;
 		ComponentArray<MovementComponent> _movements;
+		ComponentArray<JumpComponent> _jumps;
 
 		[InjectDependency]
 		protected EntityManager _entityManager;
@@ -17,10 +18,11 @@ namespace MyTest.Systems
 		{
 			base.OnStart ();
 
-			var group = _entityManager.GetComponentGroup (typeof(PositionComponent), typeof(ViewComponent), typeof(MovementComponent));
+			var group = _entityManager.GetComponentGroup (typeof(PositionComponent), typeof(ViewComponent), typeof(MovementComponent), typeof(JumpComponent));
 			_positions = group.GetComponent<PositionComponent> ();
 			_views = group.GetComponent<ViewComponent> ();
 			_movements = group.GetComponent<MovementComponent> ();
+			_jumps = group.GetComponent<JumpComponent> ();
 
 			// we probably have to use this one...
 			 group.SubscribeOnEntityAdded (this);
@@ -54,11 +56,16 @@ namespace MyTest.Systems
 				if (view.view == null)
 					continue;
 
-				_views [i].view.transform.position = _positions[i].position;
+				var pos = _positions [i].position;
+
+				_views [i].view.transform.position = new Vector3(pos.x, pos.y + pos.z, 0);
 
 				if (_views [i].animator != null) {
 					_views [i].animator.SetBool ("Walking", _movements [i].velocity.sqrMagnitude > 0);
 					_views [i].sprite.flipX = _positions[i].lookingDirection.x < 0;
+
+					_views [i].animator.SetBool("Jumping", _jumps[i].isJumping);
+					_views [i].animator.SetBool("Falling", _jumps[i].isFalling);
 				}
 			}
 		}
