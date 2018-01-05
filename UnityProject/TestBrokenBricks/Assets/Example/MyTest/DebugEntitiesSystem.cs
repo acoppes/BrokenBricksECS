@@ -15,7 +15,9 @@ public class DebugEntitiesSystem : ComponentSystem
 
 		public DelegatePhysicsComponent physics = new DelegatePhysicsComponent();
 
-		void Update()
+		bool _serializedOnce;
+
+		void SerializeFromEntity()
 		{
 			if (_entityManager.HasComponent<DelegatePhysicsComponent> (entity)) {
 				var physicsComponent = _entityManager.GetComponent<DelegatePhysicsComponent> (entity);
@@ -23,7 +25,31 @@ public class DebugEntitiesSystem : ComponentSystem
 			}			
 		}
 
-		public void OnDrawGizmos()
+		void SerializeToEntity()
+		{
+			if (_entityManager.HasComponent<DelegatePhysicsComponent> (entity)) {
+				var physicsComponent = _entityManager.GetComponent<DelegatePhysicsComponent> (entity);
+				JsonUtility.FromJsonOverwrite (JsonUtility.ToJson (physics), physicsComponent);
+			}			
+		}
+
+		void FixedUpdate()
+		{
+			SerializeFromEntity();		
+		}
+
+		void OnValidate()
+		{
+			// serialize back	
+			if (!_serializedOnce) {
+				SerializeFromEntity ();
+				_serializedOnce = true;
+			}
+
+			SerializeToEntity();		
+		}
+
+		void OnDrawGizmos()
 		{
 			if (_entityManager.HasComponent<DelegatePhysicsComponent> (entity)) {
 				var physicsComponent = _entityManager.GetComponent<DelegatePhysicsComponent> (entity);
