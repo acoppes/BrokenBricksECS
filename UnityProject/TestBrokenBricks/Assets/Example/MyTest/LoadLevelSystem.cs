@@ -17,13 +17,13 @@ public class LoadLevelSystem : ComponentSystem
 		_entityManager.AddComponent (e1, new InputComponent () {
 			horizontalAxisName = "Horizontal",
 			verticalAxisName = "Vertical",
-			jumpActionName = "Jump"
+			jumpActionName = "Jump2"
 		});
 
 		_entityManager.AddComponent (e2, new InputComponent () {
 			horizontalAxisName = "Horizontal2",
 			verticalAxisName = "Vertical2",
-			jumpActionName = "Jump2"
+			jumpActionName = "Jump"
 		});
 
 		_entityManager.GetComponent<PositionComponent> (e1).position = new Vector2(0, 0);
@@ -54,8 +54,13 @@ public class LoadLevelSystem : ComponentSystem
 		});
 
 		_entityManager.AddComponent (e, new JumpComponent () { 
-			jumpSpeed = 3,
-			maxJumpHeight = 2
+			jumpForce = 100.0f,
+			jumpStopFactor = 800.0f
+		});
+
+		_entityManager.AddComponent (e, new PhysicsParticleComponent () { 
+			maxSpeed = 15,
+			maxForce = 20000
 		});
 				
 		_entityManager.AddComponent (e, new ControllerComponent ());

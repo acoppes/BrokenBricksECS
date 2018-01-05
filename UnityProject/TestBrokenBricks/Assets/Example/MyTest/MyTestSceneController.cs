@@ -13,5 +13,6 @@ public class MyTestSceneController : ECSController<UnityStandardSystemRoot, Unit
 		AddSystem<InputSystem> ();
 		AddSystem<ControllerSystem> ();
 		AddSystem<JumpSystem> ();
+		AddSystem<PhysicsParticleSystem> ();
 	}
 }

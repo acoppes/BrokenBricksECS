@@ -3,6 +3,31 @@ using UnityEngine;
 
 namespace MyTest.Components
 {
+	public class PhysicsParticleComponent : IComponent {
+
+		public Vector3 force;
+		public Vector3 velocity;
+
+		public float maxSpeed;
+		public float maxForce;
+
+		public Vector3 position;
+
+		public float gravityMultiplier = 1.0f;
+
+		public Vector3 AddForce(Vector3 force)
+		{
+			this.force += force;
+			return this.force;
+		}
+
+		public void StopAtHeight(float height)
+		{
+			position.z = height;
+			velocity.z = 0.0f;
+		}
+	}
+
 	public class PositionComponent : IComponent
 	{
 		public Vector3 position;
@@ -19,8 +44,13 @@ namespace MyTest.Components
 
 	public class JumpComponent : IComponent
 	{
-		public float jumpSpeed;
-		public float maxJumpHeight;
+//		public float jumpSpeed;
+//		public float maxJumpHeight;
+//		public float minJumpHeight;
+
+		public float jumpForce;
+		public float currentJumpForce;
+		public float jumpStopFactor;
 
 		public bool isJumping = false;
 		public bool isFalling = false;

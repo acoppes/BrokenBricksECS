@@ -63,7 +63,9 @@ public class TestGroupCallbacks {
 		group.SubscribeOnEntityAdded (listenerMock);
 
 		var e = entityManager.CreateEntity ();
+		Assert.That (listenerMock.timesCalled, Is.EqualTo (0));
 		entityManager.AddComponent (e, new Component1 ());
+		Assert.That (listenerMock.timesCalled, Is.EqualTo (0));
 		entityManager.AddComponent (e, new Component2 ());
 		Assert.That (listenerMock.timesCalled, Is.EqualTo (1));
 		entityManager.AddComponent (e, new Component3 ());
