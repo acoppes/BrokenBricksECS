@@ -6,11 +6,9 @@ namespace MyTest.Systems
 {
 	public class ViewSystem : ComponentSystem
 	{
-		[InjectTuple]
 		ComponentArray<ViewComponent> _views;
-
-		[InjectTuple]
 		ComponentArray<PositionComponent> _positions;
+		ComponentArray<MovementComponent> _movements;
 
 		[InjectDependency]
 		protected EntityManager _entityManager;
@@ -19,12 +17,13 @@ namespace MyTest.Systems
 		{
 			base.OnStart ();
 
-			var group = _entityManager.GetComponentGroup (typeof(PositionComponent), typeof(ViewComponent));
+			var group = _entityManager.GetComponentGroup (typeof(PositionComponent), typeof(ViewComponent), typeof(MovementComponent));
 			_positions = group.GetComponent<PositionComponent> ();
 			_views = group.GetComponent<ViewComponent> ();
+			_movements = group.GetComponent<MovementComponent> ();
 
 			// we probably have to use this one...
-			group.SubscribeOnEntityAdded (this);
+			 group.SubscribeOnEntityAdded (this);
 
 //			_entityManager.SubscribeOnEntityAdded (this);
 		}
@@ -40,6 +39,8 @@ namespace MyTest.Systems
 
 			if (view.viewPrefab != null && view.view == null) {
 				view.view = GameObject.Instantiate (view.viewPrefab);
+				view.animator = view.view.GetComponentInChildren<Animator> ();
+				view.sprite = view.view.GetComponentInChildren<SpriteRenderer> ();
 			}
 
 		}
@@ -54,6 +55,11 @@ namespace MyTest.Systems
 					continue;
 
 				_views [i].view.transform.position = _positions[i].position;
+
+				if (_views [i].animator != null) {
+					_views [i].animator.SetBool ("Walking", _movements [i].velocity.sqrMagnitude > 0);
+					_views [i].sprite.flipX = _positions[i].lookingDirection.x < 0;
+				}
 			}
 		}
 

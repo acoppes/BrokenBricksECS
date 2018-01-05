@@ -6,6 +6,7 @@ namespace MyTest.Components
 	public class PositionComponent : IComponent
 	{
 		public Vector2 position;
+		public Vector2 lookingDirection;
 	}
 
 	public class MovementComponent : IComponent
@@ -20,6 +21,8 @@ namespace MyTest.Components
 	{
 		public GameObject viewPrefab;
 		public GameObject view;
+		public Animator animator;
+		public SpriteRenderer sprite;
 	}
 
 	public class ControllerComponent : IComponent
