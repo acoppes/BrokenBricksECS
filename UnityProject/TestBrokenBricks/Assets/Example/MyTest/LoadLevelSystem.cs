@@ -46,7 +46,7 @@ public class LoadLevelSystem : ComponentSystem
 		});
 
 		_entityManager.AddComponent (e, new DelegatePhysicsComponent () { 
-			maxSpeed = 15,
+//			maxSpeed = 15,
 			maxForce = 20000
 		});
 

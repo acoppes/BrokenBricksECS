@@ -43,7 +43,15 @@ namespace MyTest.Systems
 					physics.velocity += deltaV;
 				}
 
-				physics.velocity = Vector3.ClampMagnitude(physics.velocity, physics.maxSpeed);
+				var horizontalVelocity = new Vector2 (physics.velocity.x, physics.velocity.y);
+				horizontalVelocity = Vector2.ClampMagnitude (horizontalVelocity, physics.maxSpeedHorizontal);
+
+				var verticalVelocity = new Vector3 (0, 0, physics.velocity.z);
+				verticalVelocity = Vector3.ClampMagnitude (verticalVelocity, physics.maxSpeedVertical);
+
+				physics.velocity = new Vector3(horizontalVelocity.x, horizontalVelocity.y, verticalVelocity.z);
+
+//				physics.velocity = Vector3.ClampMagnitude(physics.velocity, physics.maxSpeed);
 
 				if (physics.velocity.sqrMagnitude < 0.0001f)
 					physics.velocity.Set(0, 0, 0);

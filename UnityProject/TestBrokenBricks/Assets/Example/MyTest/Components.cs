@@ -12,7 +12,9 @@ namespace MyTest.Components
 
 		public Vector3 velocity;
 
-		public float maxSpeed;
+		public float maxSpeedHorizontal;
+		public float maxSpeedVertical;
+
 		public float maxForce;
 
 		public Vector3 position;
