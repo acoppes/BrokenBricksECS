@@ -1,13 +1,15 @@
 using ECS;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GenericEntityTemplate<T> : ComponentTemplateBehaviour where T : IComponent
 {
-	public T t;
+	[FormerlySerializedAsAttribute("t")]
+	public T component;
 
 	public override void Apply (Entity e)
 	{
-		var p = JsonUtility.ToJson(t);
+		var p = JsonUtility.ToJson(component);
 		_entityManager.AddComponent(e, JsonUtility.FromJson<T>(p));
 	}
 
