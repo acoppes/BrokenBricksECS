@@ -11,26 +11,32 @@ public class LoadLevelSystem : ComponentSystem
 	{
 		base.OnStart ();
 
-		var e1 = CreateTestObject ();
-		var e2 = CreateTestObject ();
+		var e1 = _entityManager.CreateEntity ();
+		EntityTemplateExtensions.Apply(e1, GameObject.Find ("Hero1"));
 
-		_entityManager.AddComponent (e1, new InputComponent () {
-			horizontalAxisName = "Horizontal",
-			verticalAxisName = "Vertical",
-			jumpActionName = "Jump2"
-		});
+		var e2 = _entityManager.CreateEntity ();
+		EntityTemplateExtensions.Apply(e2, GameObject.Find ("Hero2"));
 
-		_entityManager.AddComponent (e2, new InputComponent () {
-			horizontalAxisName = "Horizontal2",
-			verticalAxisName = "Vertical2",
-			jumpActionName = "Jump"
-		});
+//		var e1 = CreateTestObject ();
+//		var e2 = CreateTestObject ();
 
-		_entityManager.GetComponent<PositionComponent> (e1).position = new Vector2(0, 0);
-		_entityManager.GetComponent<PositionComponent> (e2).position = new Vector2(0, 2);
+//		_entityManager.AddComponent (e1, new InputComponent () {
+//			horizontalAxisName = "Horizontal",
+//			verticalAxisName = "Vertical",
+//			jumpActionName = "Jump2"
+//		});
+//
+//		_entityManager.AddComponent (e2, new InputComponent () {
+//			horizontalAxisName = "Horizontal2",
+//			verticalAxisName = "Vertical2",
+//			jumpActionName = "Jump"
+//		});
 
-		var e3 = CreateTestObjectWithoutMovement ();
-		_entityManager.GetComponent<PositionComponent> (e3).position = new Vector2(-2, 3);
+//		_entityManager.GetComponent<PositionComponent> (e1).position = new Vector2(0, 0);
+//		_entityManager.GetComponent<PositionComponent> (e2).position = new Vector2(0, 2);
+
+//		var e3 = CreateTestObjectWithoutMovement ();
+//		_entityManager.GetComponent<PositionComponent> (e3).position = new Vector2(-2, 3);
 	}
 
 	Entity CreateTestObject()
@@ -62,6 +68,8 @@ public class LoadLevelSystem : ComponentSystem
 			maxSpeed = 15,
 			maxForce = 20000
 		});
+
+//		GameObject.FindObjectOfType<PhysicsParticleTemplate> ().Apply (e);
 				
 		_entityManager.AddComponent (e, new ControllerComponent ());
 

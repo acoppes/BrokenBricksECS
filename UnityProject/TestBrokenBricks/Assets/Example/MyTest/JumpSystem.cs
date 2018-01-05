@@ -53,7 +53,7 @@ namespace MyTest.Systems
 					_physicsParticles [i].AddForce (new Vector3 (0, 0, 1) * jump.currentJumpForce);
 					jump.currentJumpForce -= jump.jumpStopFactor * Time.deltaTime;
 
-					if (jump.currentJumpForce <= 0 || !_controllers[i].isJumpPressed) {
+					if (jump.currentJumpForce <= 0 || !_controllers [i].isJumpPressed) {
 						jump.currentJumpForce = 0;
 
 						if (physicsParticle.velocity.z <= 0) {
@@ -62,6 +62,8 @@ namespace MyTest.Systems
 						}
 					}
 						
+				} else if (!jump.isFalling && p.z > 0) {
+					jump.isFalling = true;
 				}
 
 				if (jump.isFalling) {

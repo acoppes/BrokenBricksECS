@@ -1,6 +1,8 @@
 ﻿using ECS;
 using MyTest.Systems;
 using UnityEngine;
+using MyTest.Components;
+
 
 public class MyTestSceneController : ECSController<UnityStandardSystemRoot, UnityEntityManager> {
 
