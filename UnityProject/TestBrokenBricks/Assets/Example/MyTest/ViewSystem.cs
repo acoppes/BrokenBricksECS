@@ -60,7 +60,7 @@ namespace MyTest.Systems
 				view.sprite.transform.localPosition = new Vector3(0, pos.z, 0);
 
 				if (view.animator != null) {
-					view.animator.SetBool ("Walking", _movements [i].velocity.sqrMagnitude > 0);
+					view.animator.SetBool ("Walking", _movements [i].direction.sqrMagnitude > 0);
 					view.sprite.flipX = _positions[i].lookingDirection.x < 0;
 
 					view.animator.SetBool("Jumping", _jumps[i].isJumping);

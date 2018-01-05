@@ -245,6 +245,16 @@ Prefab:
       propertyPath: component.position.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114424975227420386, guid: e50897aa6eb3a6f4c9aff7281886a0c7,
+        type: 2}
+      propertyPath: component.stopFactor
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114424975227420386, guid: e50897aa6eb3a6f4c9aff7281886a0c7,
+        type: 2}
+      propertyPath: component.speed
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e50897aa6eb3a6f4c9aff7281886a0c7, type: 2}
   m_IsPrefabParent: 0
@@ -524,6 +534,31 @@ Prefab:
         type: 2}
       propertyPath: component.position.z
       value: 4.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 114044846425414208, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.stopFactor
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114044846425414208, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.speed
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 114695847371151290, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.maxSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114044846425414208, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114695847371151290, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.frictionMultiplier
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}

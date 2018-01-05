@@ -24,7 +24,7 @@ namespace MyTest.Systems
 			base.OnFixedUpdate ();
 
 			for (int i = 0; i < _controllers.Length; i++) {
-				_movements [i].velocity = _controllers [i].movement.normalized * _movements[i].speed;
+				_movements [i].direction = _controllers [i].movement.normalized;
 			}
 		}
 

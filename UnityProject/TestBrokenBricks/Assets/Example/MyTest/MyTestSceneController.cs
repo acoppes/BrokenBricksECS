@@ -7,12 +7,19 @@ public class MyTestSceneController : ECSController<UnityStandardSystemRoot, Unit
 	public GameObject viewPrefab;
 
 	protected override void Initialize() {
+
+		#if UNITY_EDITOR
+		AddSystem<DebugEntitiesSystem> ();
+		#endif
+
 		AddSystem<MovementSystem>();
 		AddSystem<ViewSystem>();
-		AddSystem<LoadLevelSystem> ();
 		AddSystem<InputSystem> ();
 		AddSystem<ControllerSystem> ();
 		AddSystem<JumpSystem> ();
 		AddSystem<DelegatePhysicsSystem> ();
+
+		AddSystem<LoadLevelSystem> ();
 	}
 }
+

@@ -9,7 +9,7 @@ namespace MyTest.Systems
 		ComponentArray<ControllerComponent> _controllers;
 		ComponentArray<JumpComponent> _jumps;
 		ComponentArray<PositionComponent> _positions;
-		ComponentArray<DelegatePhysicsComponent> _physicsParticles;
+		ComponentArray<DelegatePhysicsComponent> _physics;
 
 		[InjectDependency]
 		protected EntityManager _entityManager;
@@ -25,7 +25,7 @@ namespace MyTest.Systems
 			_controllers = group.GetComponent<ControllerComponent> ();
 			_jumps = group.GetComponent<JumpComponent> ();
 			_positions = group.GetComponent<PositionComponent> ();
-			_physicsParticles = group.GetComponent<DelegatePhysicsComponent> ();
+			_physics = group.GetComponent<DelegatePhysicsComponent> ();
 		}
 
 		public override void OnFixedUpdate ()
@@ -34,9 +34,9 @@ namespace MyTest.Systems
 
 			for (int i = 0; i < _controllers.Length; i++) {
 				var jump = _jumps [i];
-				var physicsParticle = _physicsParticles [i];
+				var physics = _physics [i];
 
-				if (!jump.isFalling && !jump.isJumping && Mathf.Abs(physicsParticle.position.z) < Mathf.Epsilon) {
+				if (!jump.isFalling && !jump.isJumping && Mathf.Abs(physics.position.z) < Mathf.Epsilon) {
 					jump.isJumping = _controllers [i].isJumpPressed;
 					if (jump.isJumping) {
 						jump.currentJumpForce = jump.jumpForce;
@@ -46,17 +46,17 @@ namespace MyTest.Systems
 				// TODO: we could use our custom GlobalTime
 
 				var p = _positions [i].position;
-				p.z = _physicsParticles [i].position.z;
+				p.z = _physics [i].position.z;
 			
 				if (jump.isJumping) {
 
-					_physicsParticles [i].AddForce (new Vector3 (0, 0, 1) * jump.currentJumpForce);
+					_physics [i].AddForce (new Vector3 (0, 0, 1) * jump.currentJumpForce);
 					jump.currentJumpForce -= jump.jumpStopFactor * Time.deltaTime;
 
 					if (jump.currentJumpForce <= 0 || !_controllers [i].isJumpPressed) {
 						jump.currentJumpForce = 0;
 
-						if (physicsParticle.velocity.z <= 0) {
+						if (physics.velocity.z <= 0) {
 							jump.isJumping = false;
 							jump.isFalling = true;					
 						}

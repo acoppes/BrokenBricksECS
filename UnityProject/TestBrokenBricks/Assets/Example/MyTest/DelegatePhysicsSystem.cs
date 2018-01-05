@@ -16,7 +16,11 @@ namespace MyTest.Systems
 		public override void OnStart ()
 		{
 			base.OnStart ();
-			var group = _entityManager.GetComponentGroup (typeof(DelegatePhysicsComponent));
+
+			var group = _entityManager.GetComponentGroup (
+				typeof(DelegatePhysicsComponent)
+			);
+
 			_physicsParticles = group.GetComponent<DelegatePhysicsComponent> ();
 		}
 

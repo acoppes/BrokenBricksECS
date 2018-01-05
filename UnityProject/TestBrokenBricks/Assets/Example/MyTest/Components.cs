@@ -20,6 +20,8 @@ namespace MyTest.Components
 
 		public float gravityMultiplier = 1.0f;
 
+		public float frictionMultiplier = 1.0f;
+
 		public Vector3 AddForce(Vector3 force)
 		{
 			this.force += force;
@@ -30,6 +32,11 @@ namespace MyTest.Components
 		{
 			position.z = height;
 			velocity.z = 0.0f;
+		}
+
+		public bool IsOnFloor()
+		{
+			return Mathf.Abs (position.z - 0.0f) < Mathf.Epsilon;
 		}
 	}
 
@@ -47,9 +54,12 @@ namespace MyTest.Components
 	{
 //		public Vector2 acceleration;
 		[NonSerialized]
-		public Vector2 velocity;
+		public Vector2 direction;
 
+//		public float stopFactor = 1.0f;
 		public float speed;
+		public float maxSpeed = 5.0f;
+
 //		public float maxSpeed;
 	}
 

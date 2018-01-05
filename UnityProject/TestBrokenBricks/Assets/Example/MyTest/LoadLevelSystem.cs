@@ -30,7 +30,7 @@ public class LoadLevelSystem : ComponentSystem
 		});
 
 		_entityManager.AddComponent (e, new MovementComponent () {
-			velocity = new Vector2(0, 0),
+			direction = new Vector2(0, 0),
 			speed = 3
 		});
 
@@ -67,7 +67,7 @@ public class LoadLevelSystem : ComponentSystem
 		});
 
 		_entityManager.AddComponent (e, new MovementComponent () {
-			velocity = new Vector2(0, 0),
+			direction = new Vector2(0, 0),
 			speed = 0
 		});
 
