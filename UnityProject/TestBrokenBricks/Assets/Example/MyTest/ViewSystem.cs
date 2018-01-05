@@ -58,14 +58,15 @@ namespace MyTest.Systems
 
 				var pos = _positions [i].position;
 
-				_views [i].view.transform.position = new Vector3(pos.x, pos.y + pos.z, 0);
+				view.view.transform.position = new Vector3 (pos.x, pos.y, 0);
+				view.sprite.transform.localPosition = new Vector3(0, pos.z, 0);
 
-				if (_views [i].animator != null) {
-					_views [i].animator.SetBool ("Walking", _movements [i].velocity.sqrMagnitude > 0);
-					_views [i].sprite.flipX = _positions[i].lookingDirection.x < 0;
+				if (view.animator != null) {
+					view.animator.SetBool ("Walking", _movements [i].velocity.sqrMagnitude > 0);
+					view.sprite.flipX = _positions[i].lookingDirection.x < 0;
 
-					_views [i].animator.SetBool("Jumping", _jumps[i].isJumping);
-					_views [i].animator.SetBool("Falling", _jumps[i].isFalling);
+					view.animator.SetBool("Jumping", _jumps[i].isJumping);
+					view.animator.SetBool("Falling", _jumps[i].isFalling);
 				}
 			}
 		}
