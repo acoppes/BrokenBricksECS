@@ -187,7 +187,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4180059298340296, guid: e50897aa6eb3a6f4c9aff7281886a0c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.5
+      value: 3.72
       objectReference: {fileID: 0}
     - target: {fileID: 4180059298340296, guid: e50897aa6eb3a6f4c9aff7281886a0c7, type: 2}
       propertyPath: m_LocalPosition.y
@@ -220,6 +220,30 @@ Prefab:
     - target: {fileID: 1591775478071632, guid: e50897aa6eb3a6f4c9aff7281886a0c7, type: 2}
       propertyPath: m_Name
       value: Hero1Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981392587344946, guid: e50897aa6eb3a6f4c9aff7281886a0c7, type: 2}
+      propertyPath: m_TagString
+      value: EditorOnly
+      objectReference: {fileID: 0}
+    - target: {fileID: 114688292544270322, guid: e50897aa6eb3a6f4c9aff7281886a0c7,
+        type: 2}
+      propertyPath: component.position.x
+      value: 3.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 114688292544270322, guid: e50897aa6eb3a6f4c9aff7281886a0c7,
+        type: 2}
+      propertyPath: component.position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114719159507543016, guid: e50897aa6eb3a6f4c9aff7281886a0c7,
+        type: 2}
+      propertyPath: component.position.x
+      value: 3.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 114719159507543016, guid: e50897aa6eb3a6f4c9aff7281886a0c7,
+        type: 2}
+      propertyPath: component.position.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e50897aa6eb3a6f4c9aff7281886a0c7, type: 2}
@@ -438,15 +462,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4794945376148712, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.75
+      value: -3.25
       objectReference: {fileID: 0}
     - target: {fileID: 4794945376148712, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.78
       objectReference: {fileID: 0}
     - target: {fileID: 4794945376148712, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 4794945376148712, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -471,6 +495,35 @@ Prefab:
     - target: {fileID: 1111196279886782, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}
       propertyPath: m_Name
       value: Hero2Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406491030524178, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}
+      propertyPath: m_TagString
+      value: EditorOnly
+      objectReference: {fileID: 0}
+    - target: {fileID: 114209044060181970, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.position.x
+      value: -3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114209044060181970, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.position.y
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114695847371151290, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.position.x
+      value: -3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114695847371151290, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.position.y
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114695847371151290, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
+        type: 2}
+      propertyPath: component.position.z
+      value: 4.78
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}

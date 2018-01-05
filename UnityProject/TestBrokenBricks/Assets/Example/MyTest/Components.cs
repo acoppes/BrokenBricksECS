@@ -37,6 +37,8 @@ namespace MyTest.Components
 	public class PositionComponent : IComponent
 	{
 		public Vector3 position;
+
+		[NonSerialized]
 		public Vector2 lookingDirection;
 	}
 

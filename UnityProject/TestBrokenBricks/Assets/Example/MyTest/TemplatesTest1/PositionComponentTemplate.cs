@@ -1,17 +1,16 @@
 using MyTest.Components;
+using UnityEngine;
 
+[ExecuteInEditMode]
 public class PositionComponentTemplate : GenericEntityTemplate<PositionComponent> {
 
-	public override void Apply (ECS.Entity e)
+	#if UNITY_EDITOR
+	void Update()
 	{
-		base.Apply (e);
-
-		var positionComponent = _entityManager.GetComponent<PositionComponent>(e);
-
-		var p = positionComponent.position;
-		p.x = transform.position.x;
-		p.y = transform.position.z;
-		positionComponent.position = p;
+		component.position = new Vector3(transform.position.x, transform.position.z, 0);	
+		UnityEditor.EditorUtility.SetDirty (this);
+		UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
 	}
+	#endif
 
 }
