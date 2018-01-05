@@ -5,7 +5,7 @@ using System;
 namespace MyTest.Components
 {
 	[Serializable]
-	public class PhysicsParticleComponent : IComponent {
+	public class DelegatePhysicsComponent : IComponent {
 
 		[NonSerialized]
 		public Vector3 force;

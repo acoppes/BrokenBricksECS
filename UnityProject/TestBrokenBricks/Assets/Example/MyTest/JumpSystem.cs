@@ -9,7 +9,7 @@ namespace MyTest.Systems
 		ComponentArray<ControllerComponent> _controllers;
 		ComponentArray<JumpComponent> _jumps;
 		ComponentArray<PositionComponent> _positions;
-		ComponentArray<PhysicsParticleComponent> _physicsParticles;
+		ComponentArray<DelegatePhysicsComponent> _physicsParticles;
 
 		[InjectDependency]
 		protected EntityManager _entityManager;
@@ -20,12 +20,12 @@ namespace MyTest.Systems
 			var group = _entityManager.GetComponentGroup (typeof(ControllerComponent), 
 				typeof(JumpComponent), 
 				typeof(PositionComponent), 
-				typeof(PhysicsParticleComponent));
+				typeof(DelegatePhysicsComponent));
 			
 			_controllers = group.GetComponent<ControllerComponent> ();
 			_jumps = group.GetComponent<JumpComponent> ();
 			_positions = group.GetComponent<PositionComponent> ();
-			_physicsParticles = group.GetComponent<PhysicsParticleComponent> ();
+			_physicsParticles = group.GetComponent<DelegatePhysicsComponent> ();
 		}
 
 		public override void OnFixedUpdate ()

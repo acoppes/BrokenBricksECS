@@ -26,8 +26,6 @@ namespace MyTest.Systems
 
 			// we probably have to use this one...
 			 group.SubscribeOnEntityAdded (this);
-
-//			_entityManager.SubscribeOnEntityAdded (this);
 		}
 
 		public override void OnEntityAdded (object sender, Entity entity)

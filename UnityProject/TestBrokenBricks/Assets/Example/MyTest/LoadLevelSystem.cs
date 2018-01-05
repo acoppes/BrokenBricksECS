@@ -16,36 +16,8 @@ public class LoadLevelSystem : ComponentSystem
 		foreach (var sceneEntity in sceneEntities) {
 			var e = _entityManager.CreateEntity ();
 			sceneEntity.Apply (e);
-
 			sceneEntity.gameObject.SetActive (false);
 		}
-
-//		var e1 = _entityManager.CreateEntity ();
-//		EntityTemplateExtensions.Apply(e1, GameObject.Find ("Hero1"));
-
-//		var e2 = _entityManager.CreateEntity ();
-//		EntityTemplateExtensions.Apply(e2, GameObject.Find ("Hero2"));
-
-//		var e1 = CreateTestObject ();
-//		var e2 = CreateTestObject ();
-
-//		_entityManager.AddComponent (e1, new InputComponent () {
-//			horizontalAxisName = "Horizontal",
-//			verticalAxisName = "Vertical",
-//			jumpActionName = "Jump2"
-//		});
-//
-//		_entityManager.AddComponent (e2, new InputComponent () {
-//			horizontalAxisName = "Horizontal2",
-//			verticalAxisName = "Vertical2",
-//			jumpActionName = "Jump"
-//		});
-
-//		_entityManager.GetComponent<PositionComponent> (e1).position = new Vector2(0, 0);
-//		_entityManager.GetComponent<PositionComponent> (e2).position = new Vector2(0, 2);
-
-//		var e3 = CreateTestObjectWithoutMovement ();
-//		_entityManager.GetComponent<PositionComponent> (e3).position = new Vector2(-2, 3);
 	}
 
 	Entity CreateTestObject()
@@ -73,7 +45,7 @@ public class LoadLevelSystem : ComponentSystem
 			jumpStopFactor = 800.0f
 		});
 
-		_entityManager.AddComponent (e, new PhysicsParticleComponent () { 
+		_entityManager.AddComponent (e, new DelegatePhysicsComponent () { 
 			maxSpeed = 15,
 			maxForce = 20000
 		});

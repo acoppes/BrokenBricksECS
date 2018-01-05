@@ -1,8 +1,6 @@
 ﻿using ECS;
 using MyTest.Systems;
 using UnityEngine;
-using MyTest.Components;
-
 
 public class MyTestSceneController : ECSController<UnityStandardSystemRoot, UnityEntityManager> {
 
@@ -15,6 +13,6 @@ public class MyTestSceneController : ECSController<UnityStandardSystemRoot, Unit
 		AddSystem<InputSystem> ();
 		AddSystem<ControllerSystem> ();
 		AddSystem<JumpSystem> ();
-		AddSystem<PhysicsParticleSystem> ();
+		AddSystem<DelegatePhysicsSystem> ();
 	}
 }

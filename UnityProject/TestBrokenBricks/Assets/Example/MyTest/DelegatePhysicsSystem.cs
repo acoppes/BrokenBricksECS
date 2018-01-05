@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace MyTest.Systems
 {
-	public class PhysicsParticleSystem : ComponentSystem
+	public class DelegatePhysicsSystem : ComponentSystem
 	{
-		ComponentArray<PhysicsParticleComponent> _physicsParticles;
+		ComponentArray<DelegatePhysicsComponent> _physicsParticles;
 
 		[InjectDependency]
 		protected EntityManager _entityManager;
@@ -16,8 +16,8 @@ namespace MyTest.Systems
 		public override void OnStart ()
 		{
 			base.OnStart ();
-			var group = _entityManager.GetComponentGroup (typeof(PhysicsParticleComponent));
-			_physicsParticles = group.GetComponent<PhysicsParticleComponent> ();
+			var group = _entityManager.GetComponentGroup (typeof(DelegatePhysicsComponent));
+			_physicsParticles = group.GetComponent<DelegatePhysicsComponent> ();
 		}
 
 		public override void OnFixedUpdate ()
