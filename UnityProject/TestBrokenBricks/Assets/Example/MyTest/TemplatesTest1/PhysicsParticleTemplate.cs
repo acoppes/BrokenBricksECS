@@ -9,9 +9,11 @@ public class PhysicsParticleTemplate : GenericEntityTemplate<DelegatePhysicsComp
 	{
 		if (Application.isPlaying)
 			return;
-		component.position = new UnityEngine.Vector3(transform.position.x, transform.position.z, transform.position.y);	
-		UnityEditor.EditorUtility.SetDirty (this);
-		UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+		if (component.position != new UnityEngine.Vector3 (transform.position.x, transform.position.z, transform.position.y)) {
+			component.position = new UnityEngine.Vector3 (transform.position.x, transform.position.z, transform.position.y);	
+			UnityEditor.EditorUtility.SetDirty (this);
+			UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty (UnityEngine.SceneManagement.SceneManager.GetActiveScene ());
+		}
 	}
 	#endif
 
