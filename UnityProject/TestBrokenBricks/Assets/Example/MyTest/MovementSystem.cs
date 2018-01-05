@@ -37,7 +37,9 @@ namespace MyTest.Systems
 				var v = _physics [i].velocity;
 				v.z = 0.0f;
 		
-				if (_movements [i].direction.sqrMagnitude > 0 && Mathf.Abs(v.sqrMagnitude) < _movements[i].maxSpeed * _movements[i].maxSpeed)
+				// physics.setMaxSpeedInPlaneXY()
+
+				if (_movements [i].direction.sqrMagnitude > 0)
 					_physics [i].AddForce (_movements [i].direction.normalized * _movements [i].speed);
 				else {
 					if (_physics [i].IsOnFloor ()) {

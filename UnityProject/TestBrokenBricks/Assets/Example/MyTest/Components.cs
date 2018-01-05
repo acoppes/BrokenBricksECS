@@ -10,7 +10,6 @@ namespace MyTest.Components
 		[NonSerialized]
 		public Vector3 force;
 
-		[NonSerialized]
 		public Vector3 velocity;
 
 		public float maxSpeed;

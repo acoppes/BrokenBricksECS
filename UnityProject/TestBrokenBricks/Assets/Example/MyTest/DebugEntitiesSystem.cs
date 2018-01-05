@@ -1,11 +1,42 @@
 using ECS;
 using UnityEngine;
+using MyTest.Components;
 
 public class DebugEntitiesSystem : ComponentSystem
 {
-	class DebugBehaviour : MonoBehaviour
+	class DebugBehaviour : ScriptBehaviour
 	{
+		[InjectDependency]
+		EntityManager _entityManager;
+
 		public int entityId;
+
+		public Entity entity;
+
+		public DelegatePhysicsComponent physics = new DelegatePhysicsComponent();
+
+		void Update()
+		{
+			if (_entityManager.HasComponent<DelegatePhysicsComponent> (entity)) {
+				var physicsComponent = _entityManager.GetComponent<DelegatePhysicsComponent> (entity);
+				JsonUtility.FromJsonOverwrite (JsonUtility.ToJson (physicsComponent), physics);
+			}			
+		}
+
+		public void OnDrawGizmos()
+		{
+			if (_entityManager.HasComponent<DelegatePhysicsComponent> (entity)) {
+				var physicsComponent = _entityManager.GetComponent<DelegatePhysicsComponent> (entity);
+				#if UNITY_EDITOR
+
+				var unityPosition = new Vector3(physicsComponent.position.x, physicsComponent.position.z, physicsComponent.position.y);
+				var unityVelocity = new Vector3(physicsComponent.velocity.x, physicsComponent.velocity.z, physicsComponent.velocity.y);
+
+				UnityEngine.Gizmos.DrawLine(unityPosition, unityPosition + unityVelocity);
+
+				#endif
+			}	
+		}
 	}
 
 	class DebugComponent : IComponent
@@ -33,6 +64,7 @@ public class DebugEntitiesSystem : ComponentSystem
 		var entityObject = new GameObject ("Entity-" + entity.Id);
 		var debug = entityObject.AddComponent<DebugBehaviour> ();
 
+		debug.entity = entity;
 		debug.entityId = entity.Id;
 
 		entityObject.transform.SetParent (_entitiesParent);

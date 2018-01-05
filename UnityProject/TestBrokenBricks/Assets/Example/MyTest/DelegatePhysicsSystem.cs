@@ -31,23 +31,30 @@ namespace MyTest.Systems
 			var dt = Time.deltaTime;
 
 			for (int i = 0; i < _physicsParticles.Length; i++) {
-				var physicsParticle = _physicsParticles [i];
+				var physics = _physicsParticles [i];
 
-				physicsParticle.AddForce (gravity * physicsParticle.gravityMultiplier);
+				if (!physics.IsOnFloor())
+					physics.AddForce (gravity * physics.gravityMultiplier);
 
-				physicsParticle.force = Vector3.ClampMagnitude(physicsParticle.force, physicsParticle.maxForce);
+				physics.force = Vector3.ClampMagnitude(physics.force, physics.maxForce);
 
-				Vector3 deltaV = physicsParticle.force * dt;
-				physicsParticle.velocity += deltaV;
-				physicsParticle.velocity = Vector3.ClampMagnitude(physicsParticle.velocity, physicsParticle.maxSpeed);
+				if (physics.force.sqrMagnitude > 0.0001f) {
+					Vector3 deltaV = physics.force * dt;
+					physics.velocity += deltaV;
+				}
 
-				physicsParticle.position += physicsParticle.velocity * dt;
+				physics.velocity = Vector3.ClampMagnitude(physics.velocity, physics.maxSpeed);
 
-				physicsParticle.force = Vector3.zero;
+				if (physics.velocity.sqrMagnitude < 0.0001f)
+					physics.velocity.Set(0, 0, 0);
+
+				physics.position += physics.velocity * dt;
+
+				physics.force = Vector3.zero;
 
 				// colliison with floor
-				if (physicsParticle.position.z < 0.0f) {
-					physicsParticle.StopAtHeight (0.0f);
+				if (physics.position.z < 0.0f) {
+					physics.StopAtHeight (0.0f);
 				}
 			}
 		}
