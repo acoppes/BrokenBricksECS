@@ -4,32 +4,40 @@ using MyTest.Components;
 
 public class DebugEntitiesSystem : ComponentSystem
 {
-	class DebugBehaviour : ScriptBehaviour
+	class DebugBehaviour<T> : ScriptBehaviour where T : IComponent, new()
 	{
 		[InjectDependency]
 		EntityManager _entityManager;
 
-		public int entityId;
-
 		public Entity entity;
 
-		public DelegatePhysicsComponent physics = new DelegatePhysicsComponent();
+		public T debugComponent = new T();
 
 		bool _serializedOnce;
 
+		protected bool HasComponent()
+		{
+			return _entityManager.HasComponent<T> (entity);
+		}
+
+		protected T GetComponent()
+		{
+			return _entityManager.GetComponent<T> (entity);
+		}
+
 		void SerializeFromEntity()
 		{
-			if (_entityManager.HasComponent<DelegatePhysicsComponent> (entity)) {
-				var physicsComponent = _entityManager.GetComponent<DelegatePhysicsComponent> (entity);
-				JsonUtility.FromJsonOverwrite (JsonUtility.ToJson (physicsComponent), physics);
+			if (HasComponent()) {
+				var component = GetComponent();
+				JsonUtility.FromJsonOverwrite (JsonUtility.ToJson (component), debugComponent);
 			}			
 		}
 
 		void SerializeToEntity()
 		{
-			if (_entityManager.HasComponent<DelegatePhysicsComponent> (entity)) {
-				var physicsComponent = _entityManager.GetComponent<DelegatePhysicsComponent> (entity);
-				JsonUtility.FromJsonOverwrite (JsonUtility.ToJson (physics), physicsComponent);
+			if (HasComponent()) {
+				var component = GetComponent ();
+				JsonUtility.FromJsonOverwrite (JsonUtility.ToJson (debugComponent), component);
 			}			
 		}
 
@@ -45,29 +53,33 @@ public class DebugEntitiesSystem : ComponentSystem
 				SerializeFromEntity ();
 				_serializedOnce = true;
 			}
-
 			SerializeToEntity();		
 		}
+	}
+	
+	class DelegatePhysicsBehaviour : DebugBehaviour<DelegatePhysicsComponent> 
+	{
+		#if UNITY_EDITOR
 
 		void OnDrawGizmos()
 		{
-			if (_entityManager.HasComponent<DelegatePhysicsComponent> (entity)) {
-				var physicsComponent = _entityManager.GetComponent<DelegatePhysicsComponent> (entity);
-				#if UNITY_EDITOR
+			if (HasComponent()) {
+				var physicsComponent = GetComponent();
 
 				var unityPosition = new Vector3(physicsComponent.position.x, physicsComponent.position.z, physicsComponent.position.y);
 				var unityVelocity = new Vector3(physicsComponent.velocity.x, physicsComponent.velocity.z, physicsComponent.velocity.y);
 
 				UnityEngine.Gizmos.DrawLine(unityPosition, unityPosition + unityVelocity);
 
-				#endif
 			}	
 		}
+
+		#endif
 	}
 
 	class DebugComponent : IComponent
 	{
-		public DebugBehaviour debug;
+		public DebugBehaviour<DelegatePhysicsComponent> debug;
 	}
 
 	[InjectDependency]
@@ -88,10 +100,10 @@ public class DebugEntitiesSystem : ComponentSystem
 		// base.OnEntityAdded (sender, entity);
 
 		var entityObject = new GameObject ("Entity-" + entity.Id);
-		var debug = entityObject.AddComponent<DebugBehaviour> ();
+//		var debug = entityObject.AddComponent<DelegatePhysicsComponent> ();
+		var debug = entityObject.AddComponent<DelegatePhysicsBehaviour> ();
 
 		debug.entity = entity;
-		debug.entityId = entity.Id;
 
 		entityObject.transform.SetParent (_entitiesParent);
 
