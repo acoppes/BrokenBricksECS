@@ -4,7 +4,7 @@ using MyTest.Components;
 
 namespace MyTest.Systems
 {
-	public class ViewSystem : ComponentSystem
+	public class ViewSystem : ComponentSystem, IEntityAddedEventListener, IEntityRemovedEventListener
 	{
 		ComponentArray<ViewComponent> _views;
 		ComponentArray<PositionComponent> _positions;
@@ -28,10 +28,8 @@ namespace MyTest.Systems
 			 group.SubscribeOnEntityAdded (this);
 		}
 
-		public override void OnEntityAdded (object sender, Entity entity)
+		public void OnEntityAdded (object sender, Entity entity)
 		{
-			base.OnEntityAdded (sender, entity);
-
 			if (!_entityManager.HasComponent<ViewComponent> (entity))
 				return;
 

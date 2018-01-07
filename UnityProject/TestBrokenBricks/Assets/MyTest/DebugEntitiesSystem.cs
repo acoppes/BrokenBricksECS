@@ -2,7 +2,7 @@ using ECS;
 using UnityEngine;
 using MyTest.Components;
 
-public class DebugEntitiesSystem : ComponentSystem
+public class DebugEntitiesSystem : ComponentSystem, IEntityAddedEventListener, IEntityRemovedEventListener
 {
 	class DebugBehaviour<T> : ScriptBehaviour where T : IComponent, new()
 	{
@@ -95,7 +95,7 @@ public class DebugEntitiesSystem : ComponentSystem
 		_entityManager.SubscribeOnEntityAdded (this);
 	}
 
-	public override void OnEntityAdded (object sender, Entity entity)
+	public void OnEntityAdded (object sender, Entity entity)
 	{
 		// base.OnEntityAdded (sender, entity);
 
@@ -112,9 +112,8 @@ public class DebugEntitiesSystem : ComponentSystem
 		});
 	}
 
-	public override void OnEntityRemoved (object sender, Entity entity)
+	public void OnEntityRemoved (object sender, Entity entity)
 	{
-		base.OnEntityRemoved (sender, entity);
 		var debugComponent = _entityManager.GetComponent<DebugComponent> (entity);
 
 		if (debugComponent.debug != null) {
