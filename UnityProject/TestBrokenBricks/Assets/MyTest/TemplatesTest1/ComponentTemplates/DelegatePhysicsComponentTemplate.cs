@@ -2,7 +2,7 @@ using MyTest.Components;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class PhysicsParticleTemplate : GenericEntityTemplate<DelegatePhysicsComponent> {
+public class DelegatePhysicsComponentTemplate : GenericEntityTemplate<DelegatePhysicsComponent> {
 
 	#if UNITY_EDITOR
 	void Update()
@@ -18,3 +18,4 @@ public class PhysicsParticleTemplate : GenericEntityTemplate<DelegatePhysicsComp
 	#endif
 
 }
+	

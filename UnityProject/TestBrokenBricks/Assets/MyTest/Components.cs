@@ -12,8 +12,8 @@ namespace MyTest.Components
 
 		public Vector3 velocity;
 
-		public float maxSpeedHorizontal;
-		public float maxSpeedVertical;
+//		public float maxSpeedHorizontal;
+//		public float maxSpeedVertical;
 
 		public float maxForce;
 
@@ -42,6 +42,13 @@ namespace MyTest.Components
 	}
 
 	[Serializable]
+	public class LimitVelocityComponent : IComponent
+	{
+		public float maxSpeedHorizontal;
+		public float maxSpeedVertical;
+	}
+
+	[Serializable]
 	public class PositionComponent : IComponent
 	{
 		public Vector3 position;
@@ -53,24 +60,16 @@ namespace MyTest.Components
 	[Serializable]
 	public class MovementComponent : IComponent
 	{
-//		public Vector2 acceleration;
 		[NonSerialized]
 		public Vector2 direction;
 
-//		public float stopFactor = 1.0f;
+		// it is the movement force (acceleration)
 		public float speed;
-		public float maxSpeed = 5.0f;
-
-//		public float maxSpeed;
 	}
 
 	[Serializable]
 	public class JumpComponent : IComponent
 	{
-//		public float jumpSpeed;
-//		public float maxJumpHeight;
-//		public float minJumpHeight;
-
 		public float jumpForce;
 
 		[NonSerialized]

@@ -77,6 +77,11 @@ public class DebugEntitiesSystem : ComponentSystem, IEntityAddedEventListener, I
 		#endif
 	}
 
+	class DelegateLimitVelocityBehaviour : DebugBehaviour<LimitVelocityComponent>
+	{
+		
+	}
+
 	class DebugComponent : IComponent
 	{
 		public DebugBehaviour<DelegatePhysicsComponent> debug;
@@ -102,6 +107,7 @@ public class DebugEntitiesSystem : ComponentSystem, IEntityAddedEventListener, I
 		var entityObject = new GameObject ("Entity-" + entity.Id);
 //		var debug = entityObject.AddComponent<DelegatePhysicsComponent> ();
 		var debug = entityObject.AddComponent<DelegatePhysicsBehaviour> ();
+		entityObject.AddComponent<DelegateLimitVelocityBehaviour> ().entity = entity;
 
 		debug.entity = entity;
 
