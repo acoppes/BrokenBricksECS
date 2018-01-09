@@ -4,7 +4,7 @@ using MyTest.Components;
 
 namespace MyTest.Systems
 {
-	public class MovementSystem : ComponentSystem
+	public class MovementPhyisicsSystem : ComponentSystem
 	{
 		ComponentGroup _group;
 
@@ -16,7 +16,7 @@ namespace MyTest.Systems
 			base.OnStart ();
 
 			_group = _entityManager.GetComponentGroup (
-				typeof(MovementComponent), 
+				typeof(MovementPhysicsComponent), 
 				typeof(PositionComponent),
 				typeof(DelegatePhysicsComponent)
 			);
@@ -28,15 +28,15 @@ namespace MyTest.Systems
 
 			var dt = Time.deltaTime;
 
-			var movements = _group.GetComponent<MovementComponent> ();
-			var positions = _group.GetComponent<PositionComponent> ();
+			var movementArray = _group.GetComponent<MovementPhysicsComponent> ();
+			var positionArray = _group.GetComponent<PositionComponent> ();
 			var physicsArray = _group.GetComponent<DelegatePhysicsComponent> ();
 
 			Vector3 horizontalForce = new Vector3();
 
-			for (int i = 0; i < movements.Length; i++) {
-				var movement = movements [i];
-				var position = positions [i];
+			for (int i = 0; i < movementArray.Length; i++) {
+				var movement = movementArray [i];
+				var position = positionArray [i];
 				var physics = physicsArray [i];
 
 				var v = physics.velocity;
@@ -44,7 +44,7 @@ namespace MyTest.Systems
 
 				if (movement.direction.sqrMagnitude > 0) {
 
-					var moveForce = (Vector3) movement.direction.normalized * movement.speed;
+					var moveForce = (Vector3) movement.direction.normalized * movement.force;
 
 					var maxSpeedHorizontal = movement.maxSpeedHorizontal;
 

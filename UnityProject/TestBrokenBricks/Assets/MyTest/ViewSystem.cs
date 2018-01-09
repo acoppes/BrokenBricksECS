@@ -8,7 +8,7 @@ namespace MyTest.Systems
 	{
 		ComponentArray<ViewComponent> _views;
 		ComponentArray<PositionComponent> _positions;
-		ComponentArray<MovementComponent> _movements;
+		ComponentArray<MovementPhysicsComponent> _movements;
 		ComponentArray<JumpComponent> _jumps;
 
 		[InjectDependency]
@@ -18,10 +18,10 @@ namespace MyTest.Systems
 		{
 			base.OnStart ();
 
-			var group = _entityManager.GetComponentGroup (typeof(PositionComponent), typeof(ViewComponent), typeof(MovementComponent), typeof(JumpComponent));
+			var group = _entityManager.GetComponentGroup (typeof(PositionComponent), typeof(ViewComponent), typeof(MovementPhysicsComponent), typeof(JumpComponent));
 			_positions = group.GetComponent<PositionComponent> ();
 			_views = group.GetComponent<ViewComponent> ();
-			_movements = group.GetComponent<MovementComponent> ();
+			_movements = group.GetComponent<MovementPhysicsComponent> ();
 			_jumps = group.GetComponent<JumpComponent> ();
 
 			// we probably have to use this one...

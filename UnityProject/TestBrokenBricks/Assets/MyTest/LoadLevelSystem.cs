@@ -29,9 +29,9 @@ public class LoadLevelSystem : ComponentSystem
 			lookingDirection = new Vector2(1, 0)
 		});
 
-		_entityManager.AddComponent (e, new MovementComponent () {
+		_entityManager.AddComponent (e, new MovementPhysicsComponent () {
 			direction = new Vector2(0, 0),
-			speed = 3
+			force = 3
 		});
 
 		var viewPrefab = GameObject.FindObjectOfType<MyTestSceneController> ().viewPrefab;
@@ -66,9 +66,9 @@ public class LoadLevelSystem : ComponentSystem
 			lookingDirection = new Vector2(1, 0)
 		});
 
-		_entityManager.AddComponent (e, new MovementComponent () {
+		_entityManager.AddComponent (e, new MovementPhysicsComponent () {
 			direction = new Vector2(0, 0),
-			speed = 0
+			force = 0
 		});
 
 		var viewPrefab = GameObject.FindObjectOfType<MyTestSceneController> ().viewPrefab;

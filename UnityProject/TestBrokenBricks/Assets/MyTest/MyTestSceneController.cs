@@ -12,9 +12,12 @@ public class MyTestSceneController : ECSController<UnityStandardSystemRoot, Unit
 		AddSystem<DebugEntitiesSystem> ();
 		#endif
 
-		AddSystem<MovementSystem>();
+		AddSystem<MovementPhyisicsSystem>();
 		AddSystem<ViewSystem>();
+
 		AddSystem<InputSystem> ();
+		AddSystem<IABehaviourSystem> ();
+
 		AddSystem<ControllerSystem> ();
 		AddSystem<JumpSystem> ();
 

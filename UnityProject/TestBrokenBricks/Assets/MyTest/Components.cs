@@ -54,13 +54,13 @@ namespace MyTest.Components
 	}
 
 	[Serializable]
-	public class MovementComponent : IComponent
+	public class MovementPhysicsComponent : IComponent
 	{
 		[NonSerialized]
 		public Vector2 direction;
 
 		// it is the movement force (acceleration)
-		public float speed;
+		public float force;
 
 		public float maxSpeedHorizontal;
 	}
@@ -110,5 +110,28 @@ namespace MyTest.Components
 		public string horizontalAxisName;
 		public string verticalAxisName;
 		public string jumpActionName;
+	}
+
+	[Serializable]
+	public class IABehaviourComponent : IComponent
+	{
+		// link to behaviour tree?
+
+		[NonSerialized]
+		public bool waitingForAction = true;
+
+		[NonSerialized]
+		public bool walking;
+
+		[NonSerialized]
+		public float actionTime;
+
+		public float waitForActionTime;
+
+		public float maxRandomDistance = 1.0f;
+
+		[NonSerialized]
+		public Vector3 destination;
+
 	}
 }

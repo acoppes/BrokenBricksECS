@@ -1,5 +1,5 @@
 using MyTest.Components;
 
-public class MovementComponentTemplate : GenericEntityTemplate<MovementComponent> {
+public class MovementComponentTemplate : GenericEntityTemplate<MovementPhysicsComponent> {
 
 }

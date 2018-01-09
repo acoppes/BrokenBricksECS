@@ -6,7 +6,7 @@ namespace MyTest.Systems
 	public class ControllerSystem : ComponentSystem
 	{
 		ComponentArray<ControllerComponent> _controllers;
-		ComponentArray<MovementComponent> _movements;
+		ComponentArray<MovementPhysicsComponent> _movements;
 
 		[InjectDependency]
 		protected EntityManager _entityManager;
@@ -14,9 +14,9 @@ namespace MyTest.Systems
 		public override void OnStart ()
 		{
 			base.OnStart ();
-			var group = _entityManager.GetComponentGroup (typeof(ControllerComponent), typeof(MovementComponent));
+			var group = _entityManager.GetComponentGroup (typeof(ControllerComponent), typeof(MovementPhysicsComponent));
 			_controllers = group.GetComponent<ControllerComponent> ();
-			_movements = group.GetComponent<MovementComponent> ();
+			_movements = group.GetComponent<MovementPhysicsComponent> ();
 		}
 
 		public override void OnFixedUpdate ()
