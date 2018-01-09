@@ -6,9 +6,7 @@ namespace MyTest.Systems
 {
 	public class MovementSystem : ComponentSystem
 	{
-		ComponentArray<PositionComponent> _positions;
-		ComponentArray<MovementComponent> _movements;
-		ComponentArray<DelegatePhysicsComponent> _physics;
+		ComponentGroup _group;
 
 		[InjectDependency]
 		protected EntityManager _entityManager;
@@ -17,49 +15,70 @@ namespace MyTest.Systems
 		{
 			base.OnStart ();
 
-			var group = _entityManager.GetComponentGroup (
+			_group = _entityManager.GetComponentGroup (
 				typeof(MovementComponent), 
 				typeof(PositionComponent),
 				typeof(DelegatePhysicsComponent)
 			);
-
-			_movements = group.GetComponent<MovementComponent> ();
-			_positions = group.GetComponent<PositionComponent> ();
-			_physics = group.GetComponent<DelegatePhysicsComponent> ();
 		}
 
 		public override void OnFixedUpdate ()
 		{
 			base.OnFixedUpdate ();
 
-			for (int i = 0; i < _movements.Length; i++) {
+			var dt = Time.deltaTime;
 
-				var v = _physics [i].velocity;
+			var movements = _group.GetComponent<MovementComponent> ();
+			var positions = _group.GetComponent<PositionComponent> ();
+			var physicsArray = _group.GetComponent<DelegatePhysicsComponent> ();
+
+			Vector3 horizontalForce = new Vector3();
+
+			for (int i = 0; i < movements.Length; i++) {
+				var movement = movements [i];
+				var position = positions [i];
+				var physics = physicsArray [i];
+
+				var v = physics.velocity;
 				v.z = 0.0f;
-		
-				// physics.setMaxSpeedInPlaneXY()
 
-				if (_movements [i].direction.sqrMagnitude > 0)
-					_physics [i].AddForce (_movements [i].direction.normalized * _movements [i].speed);
-				else {
-					if (_physics [i].IsOnFloor ()) {
-						_physics [i].AddForce (_physics [i].velocity * _physics[i].frictionMultiplier * -1.0f);
+				if (movement.direction.sqrMagnitude > 0) {
+
+					var moveForce = (Vector3) movement.direction.normalized * movement.speed;
+
+					var maxSpeedHorizontal = movement.maxSpeedHorizontal;
+
+					if (maxSpeedHorizontal > 0) {
+						// this does some "estimation" of physics behaviour.. not sure if here is the right
+						// place but want to do this logic only for movement...
+						var vh = physics.velocity + moveForce * dt;
+						vh.Set (vh.x, vh.y, 0);
+
+						if (vh.sqrMagnitude > (maxSpeedHorizontal * maxSpeedHorizontal) && dt > 0) {
+							var limitForce = (vh - (vh.normalized * maxSpeedHorizontal)) / dt;
+							moveForce += (limitForce * -1);
+						} 
+					}
+
+					physics.AddForce (moveForce);
+
+				} else {
+					if (physics.IsOnFloor ()) {
+						physics.AddForce (physics.velocity * physics.frictionMultiplier * -1.0f);
 					}
 				}
 
-				// movement friction??
-
-				var p = _physics [i].position;
+				var p = physics.position;
 				// managed by jump for now...
-				p.z = _positions [i].position.z;
+				p.z = position.position.z;
 
 //				_positions[i].position = _positions[i].position + (Vector3)(movement.velocity * Time.deltaTime);
 
-				if (Mathf.Abs (_physics[i].velocity.x) > 0) { 
-					_positions [i].lookingDirection = _physics[i].velocity.normalized;
+				if (Mathf.Abs (physics.velocity.x) > 0) { 
+					position.lookingDirection = physics.velocity.normalized;
 				}
 
-				_positions [i].position = p;
+				position.position = p;
 			}
 		}
 

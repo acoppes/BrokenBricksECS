@@ -61,6 +61,8 @@ namespace MyTest.Components
 
 		// it is the movement force (acceleration)
 		public float speed;
+
+		public float maxSpeedHorizontal;
 	}
 
 	[Serializable]
