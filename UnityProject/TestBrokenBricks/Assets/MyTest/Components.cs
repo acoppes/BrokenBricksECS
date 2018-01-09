@@ -12,9 +12,6 @@ namespace MyTest.Components
 
 		public Vector3 velocity;
 
-//		public float maxSpeedHorizontal;
-//		public float maxSpeedVertical;
-
 		public float maxForce;
 
 		public Vector3 position;
@@ -45,7 +42,6 @@ namespace MyTest.Components
 	public class LimitVelocityComponent : IComponent
 	{
 		public float maxSpeedHorizontal;
-		public float maxSpeedVertical;
 	}
 
 	[Serializable]

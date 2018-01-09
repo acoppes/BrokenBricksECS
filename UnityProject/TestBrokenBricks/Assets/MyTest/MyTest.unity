@@ -423,7 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   component:
     maxSpeedHorizontal: 3
-    maxSpeedVertical: 255
+    maxSpeedVertical: 0
 --- !u!1 &1062452933
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +584,7 @@ Prefab:
     - target: {fileID: 114044846425414208, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
         type: 2}
       propertyPath: component.speed
-      value: 99
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 114695847371151290, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
         type: 2}
@@ -624,7 +624,7 @@ Prefab:
     - target: {fileID: 114156823912879994, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b,
         type: 2}
       propertyPath: component.jumpStopFactor
-      value: 2000
+      value: 2200
       objectReference: {fileID: 0}
     - target: {fileID: 4920065711494814, guid: 0c2fa9d01086f1548adccb9a5c8a1f9b, type: 2}
       propertyPath: m_LocalRotation.x
