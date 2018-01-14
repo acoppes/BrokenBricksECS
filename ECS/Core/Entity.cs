@@ -37,6 +37,11 @@ namespace ECS
             _entityManager.AddComponent<T>(this, component);
         }
 
+        public void SetComponent<T>(T component) where T: struct, IComponent
+        {
+            _entityManager.SetComponent(this, component);
+        }
+
         public void RemoveComponent<T>() where T : IComponent
         {
             _entityManager.RemoveComponent<T>(this);

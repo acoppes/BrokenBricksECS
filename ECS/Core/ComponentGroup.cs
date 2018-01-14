@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace ECS {
-    public class ComponentGroup {
+    public partial class ComponentGroup {
         private readonly GroupMatcher _groupMatcher;
         private readonly Dictionary<Type, ComponentArray> _components = new Dictionary<Type, ComponentArray>();
 
